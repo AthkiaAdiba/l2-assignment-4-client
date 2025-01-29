@@ -1,4 +1,4 @@
-import App from "@/App";
+import MainLayout from "@/components/layout/MainLayout";
 import About from "@/pages/About/About";
 import AllProducts from "@/pages/AllProducts/AllProducts";
 import Home from "@/pages/Home/Home/Home";
@@ -9,7 +9,7 @@ import { createBrowserRouter } from "react-router-dom";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <MainLayout />,
     children: [
       {
         path: "/",

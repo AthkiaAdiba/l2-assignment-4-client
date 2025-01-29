@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { HiMenuAlt1 } from "react-icons/hi";
-import { RxCross1 } from "react-icons/rx";
-import { Link, NavLink } from "react-router-dom";
-import logo from "../../assets/logo.png";
-import profile from "../../assets/profile.jpg";
 import { GoPerson } from "react-icons/go";
+import logo from "../../assets/logo.png";
+import { RxCross1 } from "react-icons/rx";
+import { HiMenuAlt1 } from "react-icons/hi";
+import { Link, NavLink } from "react-router-dom";
 import { SlHandbag } from "react-icons/sl";
+import profile from "../../assets/profile.jpg";
 
-const Navbar = () => {
+const HomeSidebar = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   type TRoute = {
@@ -100,7 +100,7 @@ const Navbar = () => {
         {isDrawerOpen && (
           <div
             className={`lg:hidden absolute duration-1000 ${
-              isDrawerOpen ? "top-16" : "-top-96"
+              isDrawerOpen ? "top-44" : "-top-96"
             }`}
           >
             <ul className="space-y-4 p-4 bg-[#faf7f0] text-xl font-medium">
@@ -131,4 +131,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default HomeSidebar;
