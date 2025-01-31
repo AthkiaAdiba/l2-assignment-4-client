@@ -5,6 +5,11 @@ import Home from "@/pages/Home/Home/Home";
 import Login from "@/pages/Login/Login";
 import Register from "@/pages/Register/Register";
 import { createBrowserRouter } from "react-router-dom";
+import ProtectedRoute from "./ProtectedRoute";
+import App from "@/App";
+import { adminPaths } from "./admin.routes";
+import { routeGenerator } from "@/utils/routesGenerator";
+import { userPaths } from "./user.route";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +37,24 @@ const router = createBrowserRouter([
   {
     path: "register",
     element: <Register />,
+  },
+  {
+    path: "admin",
+    element: (
+      <ProtectedRoute role="admin">
+        <App />
+      </ProtectedRoute>
+    ),
+    children: routeGenerator(adminPaths),
+  },
+  {
+    path: "user",
+    element: (
+      <ProtectedRoute role="user">
+        <App />
+      </ProtectedRoute>
+    ),
+    children: routeGenerator(userPaths),
   },
 ]);
 

@@ -3,12 +3,17 @@ import { HiMenuAlt1 } from "react-icons/hi";
 import { RxCross1 } from "react-icons/rx";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo.png";
-import profile from "../../assets/profile.jpg";
-import { GoPerson } from "react-icons/go";
 import { SlHandbag } from "react-icons/sl";
+import Login from "@/pages/Login/LoginModal";
+import { useAppSelector } from "@/redux/hooks";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
+import PopOver from "./PopOver";
+import { GoPerson } from "react-icons/go";
 
 const Navbar = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const user = useAppSelector(selectCurrentUser);
+  // console.log(user);
 
   type TRoute = {
     path: string;
@@ -43,18 +48,18 @@ const Navbar = () => {
               ))}
             </ul>
           </div>
-          <div className="flex items-center gap-7 hover:underline">
-            <button className="flex items-center gap-2 bg-[#1e2525] text-white p-2">
-              <GoPerson /> LOG IN/SIGN UP
-            </button>
-            <Link to="" className="flex hidden items-center gap-1">
-              <img
-                src={profile}
-                alt=""
-                className="h-12 w-12 rounded-full bg-white"
-              />
-              <p className="text-lg font-semibold">ATHKIA ADIBA</p>
-            </Link>
+          <div className="flex items-center gap-7">
+            {/* {!user && <Login />} */}
+            {!user && (
+              <Link
+                to="/login"
+                className="flex items-center gap-2 bg-[#1e2525] text-white p-2"
+              >
+                <GoPerson /> LOG IN/SIGN UP
+              </Link>
+            )}
+            {user && <PopOver />}
+
             <div className="relative">
               <button className="flex items-center gap-2 text-xl font-medium">
                 <SlHandbag /> CART
@@ -83,17 +88,11 @@ const Navbar = () => {
               <img src={logo} alt="" className="h-14 w-14" />
             </div>
           </div>
-          <button className="flex hidden items-center gap-2 bg-[#1e2525] text-white p-2">
+          {!user && <Login />}
+          {/* <button className="flex items-center gap-2 bg-[#1e2525] text-white p-2">
             <GoPerson /> LOG IN/SIGN UP
-          </button>
-          <Link to="" className="flex items-center gap-1">
-            <img
-              src={profile}
-              alt=""
-              className="h-10 w-10 rounded-full bg-white"
-            />
-            <p>ATHKIA ADIBA</p>
-          </Link>
+          </button> */}
+          {user && <PopOver />}
         </div>
 
         {/* Drawer Menu */}

@@ -1,8 +1,14 @@
-// import "./App.css";
-// import MainLayout from "./components/layout/MainLayout";
+import "./App.css";
+import Dashboard from "./components/layout/Dashboard";
 
-// function App() {
-//   return <MainLayout></MainLayout>;
-// }
+import ProtectedRoute from "./routes/ProtectedRoute";
 
-// export default App;
+function App() {
+  return (
+    <ProtectedRoute role={undefined}>
+      <Dashboard></Dashboard>
+    </ProtectedRoute>
+  );
+}
+
+export default App;
