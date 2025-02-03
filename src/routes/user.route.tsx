@@ -1,3 +1,4 @@
+import MyProfile from "@/pages/MyProfile/MyProfile";
 import MyOrders from "@/pages/User/MyOrders";
 import UserDashboard from "@/pages/User/UserDashboard";
 import { MdDashboard } from "react-icons/md";
@@ -13,6 +14,11 @@ export const userPaths = [
     name: "My Orders",
     path: "myOrders",
     element: <MyOrders />,
+  },
+  {
+    name: "My Profile",
+    path: "myProfile",
+    element: <MyProfile />,
   },
 ];
 

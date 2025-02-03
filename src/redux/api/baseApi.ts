@@ -34,7 +34,8 @@ const baseQueryWithRefreshToken: BaseQueryFn<
   // console.log(result);
 
   if (result.error?.status === 404) {
-    toast.error(result?.error?.data?.message);
+    toast.error((result?.error?.data as { message?: string })?.message);
+    // toast.error(result?.error?.data?.message);
   }
 
   if (result.error?.status === 401) {
@@ -71,6 +72,6 @@ const baseQueryWithRefreshToken: BaseQueryFn<
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: baseQueryWithRefreshToken,
-  tagTypes: ["semester", "courses", "offeredCourse"],
+  tagTypes: ["products", "orders", "users"],
   endpoints: () => ({}),
 });

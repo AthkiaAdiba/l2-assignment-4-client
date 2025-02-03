@@ -1,14 +1,18 @@
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import profile from "../../assets/profile.jpg";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { logOut, selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { RxDashboard } from "react-icons/rx";
 import { IoIosLogOut } from "react-icons/io";
+import { useGetSingleUserQuery } from "@/redux/features/admin/user.api";
 
 const PopOver = () => {
   const user = useAppSelector(selectCurrentUser);
+  // console.log(user);
+  const { data: singleUser } = useGetSingleUserQuery(user?.userId);
   const disPatch = useAppDispatch();
+
+  // console.log(singleUser);
 
   const handleLogout = () => {
     disPatch(logOut());
@@ -19,11 +23,11 @@ const PopOver = () => {
       <PopoverTrigger>
         <div className="flex items-center gap-1">
           <img
-            src={profile}
+            src={singleUser?.data?.image}
             alt=""
             className="h-10 w-10 rounded-full bg-white"
           />
-          <p>ATHKIA ADIBA</p>
+          <p>{singleUser?.data?.name}</p>
         </div>
       </PopoverTrigger>
       <PopoverContent className="bg-[#f6dfd1] w-40 text-base font-normal">

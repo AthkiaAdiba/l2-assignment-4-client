@@ -1,4 +1,7 @@
-import { useCurrentToken } from "@/redux/features/auth/authSlice";
+import {
+  selectCurrentUser,
+  useCurrentToken,
+} from "@/redux/features/auth/authSlice";
 import { useAppSelector } from "@/redux/hooks";
 import { useState } from "react";
 import { MdDashboard, MdOutlineClose } from "react-icons/md";
@@ -6,6 +9,8 @@ import { Link } from "react-router-dom";
 import { IoMdMenu } from "react-icons/io";
 import { verifyToken } from "@/utils/verifyToken";
 import { RiShoppingBasketLine } from "react-icons/ri";
+import { FaHome } from "react-icons/fa";
+import { useGetSingleUserQuery } from "@/redux/features/admin/user.api";
 
 // type TRoute = {
 //   path: string;
@@ -15,11 +20,12 @@ import { RiShoppingBasketLine } from "react-icons/ri";
 // };
 
 const Sidebar = () => {
-  // const user = useAppSelector(selectCurrentUser);
+  const currentUser = useAppSelector(selectCurrentUser);
   const token = useAppSelector(useCurrentToken);
   const [openSidebar, setOpenSidebar] = useState(false);
 
-  const user = verifyToken(token);
+  const user = verifyToken(token as string);
+  const { data: singleUser } = useGetSingleUserQuery(currentUser?.userId);
 
   const userRoutes = [
     {
@@ -33,6 +39,12 @@ const Sidebar = () => {
       name: "My Orders",
       id: 2,
       icon: <RiShoppingBasketLine />,
+    },
+    {
+      path: `/`,
+      name: "Home",
+      id: 3,
+      icon: <FaHome />,
     },
   ];
 
@@ -52,8 +64,26 @@ const Sidebar = () => {
     {
       path: `/${user?.role}/allUsers`,
       name: "All Users",
-      id: 2,
+      id: 3,
       icon: <RiShoppingBasketLine />,
+    },
+    {
+      path: `/${user?.role}/addProduct`,
+      name: "Add Product",
+      id: 4,
+      icon: <RiShoppingBasketLine />,
+    },
+    {
+      path: `/${user?.role}/allProducts`,
+      name: "All Products",
+      id: 5,
+      icon: <RiShoppingBasketLine />,
+    },
+    {
+      path: `/`,
+      name: "Home",
+      id: 6,
+      icon: <FaHome />,
     },
   ];
 
@@ -73,7 +103,7 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`h-screen p-3 pt-8 space-y-2 w-60 bg-gray-900 text-white fixed lg:relative top-0 left-0 transform transition-transform duration-300 ease-in-out ${
+        className={`h-full p-3 pt-8 space-y-2 w-60 bg-gray-900 text-white fixed lg:relative top-0 left-0 transform transition-transform duration-300 ease-in-out z-50 ${
           openSidebar ? "translate-x-0" : "-translate-x-full"
         } lg:translate-x-0`}
       >
@@ -88,16 +118,19 @@ const Sidebar = () => {
         {/* User Info */}
         <div className="flex items-center p-2 space-x-4">
           <img
-            src="https://source.unsplash.com/100x100/?portrait"
+            src={singleUser?.data?.image}
             alt="User Avatar"
             className="w-12 h-12 rounded-full"
           />
           <div>
-            <h2 className="text-lg font-semibold">Leroy Jenkins</h2>
+            <h2 className="text-lg font-semibold">{singleUser?.data?.name}</h2>
             <span className="flex items-center space-x-1">
-              <a href="#" className="text-xs hover:underline text-gray-400">
+              <Link
+                to={`/${user?.role}/myProfile`}
+                className="text-base hover:underline text-gray-400"
+              >
                 View profile
-              </a>
+              </Link>
             </span>
           </div>
         </div>

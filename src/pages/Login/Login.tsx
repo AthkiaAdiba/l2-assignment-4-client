@@ -17,18 +17,15 @@ import { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { FaFacebookF } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [toggleLoginForm, setToggleLoginForm] = useState(false);
   const form = useForm();
   const [login] = useLoginMutation();
   const disPatch = useAppDispatch();
   const navigate = useNavigate();
-
-  const from = location.state?.from?.pathname || "/";
 
   const {
     register,
@@ -48,8 +45,7 @@ const Login = () => {
       disPatch(setUser({ user: user, token: res.data.accessToken }));
       toast.success("Logged in successfully!", { id: toastId, duration: 2000 });
 
-      navigate(from, { replace: true });
-      // navigate(`/${user.role}/dashboard`);
+      navigate(`/`);
 
       form.reset();
     } catch (error: any) {
@@ -61,7 +57,7 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-[#faf7f0] h-screen">
+    <div className="bg-[#faf7f0] min-h-screen">
       <div className="space-y-5 max-w-md mx-auto pt-14">
         <h1 className="text-center text-3xl font-bold">Login</h1>
         <Form {...form}>
@@ -147,12 +143,9 @@ const Login = () => {
         </div>
         <div className="mx-auto">
           <h3 className="text-lg font-medium text-center">New to Papier?</h3>
-          <p
-            className="underline text-center"
-            onClick={() => setToggleLoginForm(!toggleLoginForm)}
-          >
-            Create an account
-          </p>
+          <Link to="/register">
+            <p className="underline text-center">Create an account</p>
+          </Link>
         </div>
       </div>
     </div>
