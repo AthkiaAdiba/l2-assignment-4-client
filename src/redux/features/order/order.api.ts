@@ -12,7 +12,14 @@ const productManagementApi = baseApi.injectEndpoints({
     }),
     getAllOrders: builder.query({
       query: () => ({
-        url: `/users`,
+        url: `/orders`,
+        method: "GET",
+      }),
+      providesTags: ["orders"],
+    }),
+    getMyOrders: builder.query({
+      query: () => ({
+        url: `/orders/my-orders`,
         method: "GET",
       }),
       providesTags: ["orders"],
@@ -32,4 +39,5 @@ export const {
   useCreateOrdersMutation,
   useGetAllOrdersQuery,
   useVerifyOrderQuery,
+  useGetMyOrdersQuery,
 } = productManagementApi;
