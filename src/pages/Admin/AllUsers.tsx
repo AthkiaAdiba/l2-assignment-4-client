@@ -12,9 +12,10 @@ import {
   useGetAllUserQuery,
   useUpdateUserStatusMutation,
 } from "@/redux/features/admin/user.api";
+import { TailSpin } from "react-loader-spinner";
 
 const AllUsers = () => {
-  const { data: usersData } = useGetAllUserQuery(undefined);
+  const { data: usersData, isLoading } = useGetAllUserQuery(undefined);
   const [updateUserStatus] = useUpdateUserStatusMutation();
   // console.log(usersData?.data);
   const users = usersData?.data;
@@ -25,7 +26,23 @@ const AllUsers = () => {
 
   return (
     <div>
-      <h1 className="text-4xl font-bold pb-10 text-center">All Products</h1>
+      {/* Display the loader when loading */}
+      {isLoading && (
+        <div className="flex justify-center items-center py-5">
+          <TailSpin
+            visible={true}
+            height="80"
+            width="80"
+            color="#111827"
+            ariaLabel="tail-spin-loading"
+            radius="1"
+            wrapperStyle={{}}
+            wrapperClass=""
+          />
+        </div>
+      )}
+
+      <h1 className="text-4xl font-bold pb-10 text-center">All Users</h1>
       <div className="mr-2 lg:mr-5 overflow-x-auto">
         <Table className="border-2 mb-5 lg:mb-10">
           {/* <TableCaption>A list of your recent invoices.</TableCaption> */}

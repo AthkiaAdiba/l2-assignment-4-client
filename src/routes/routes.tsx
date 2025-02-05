@@ -10,6 +10,9 @@ import App from "@/App";
 import { adminPaths } from "./admin.routes";
 import { routeGenerator } from "@/utils/routesGenerator";
 import { userPaths } from "./user.route";
+import ProductDetails from "@/components/layout/ProductDetails";
+import Cart from "@/pages/Cart/Cart";
+import VerifyOrder from "@/pages/VerifyOrder/VerifyOrder";
 
 const router = createBrowserRouter([
   {
@@ -25,8 +28,20 @@ const router = createBrowserRouter([
         element: <AllProducts />,
       },
       {
+        path: "/allProducts/:id",
+        element: <ProductDetails />,
+      },
+      {
         path: "/about",
         element: <About />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
+      },
+      {
+        path: "verifyOrder",
+        element: <VerifyOrder />,
       },
     ],
   },

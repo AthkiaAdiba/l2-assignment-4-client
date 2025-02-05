@@ -13,11 +13,12 @@ import {
   useGetAllProductsQuery,
 } from "@/redux/features/admin/product.api";
 import { TProduct } from "@/types/product.type";
+import { TailSpin } from "react-loader-spinner";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 
 const AllProductsOfAdmin = () => {
-  const { data: allProducts } = useGetAllProductsQuery(undefined);
+  const { data: allProducts, isLoading } = useGetAllProductsQuery(undefined);
   const [deleteProduct] = useDeleteSingleProductMutation();
   const products = allProducts?.data;
 
@@ -41,6 +42,22 @@ const AllProductsOfAdmin = () => {
 
   return (
     <div>
+      {/* Display the loader when loading */}
+      {isLoading && (
+        <div className="flex justify-center items-center py-5">
+          <TailSpin
+            visible={true}
+            height="80"
+            width="80"
+            color="#111827"
+            ariaLabel="tail-spin-loading"
+            radius="1"
+            wrapperStyle={{}}
+            wrapperClass=""
+          />
+        </div>
+      )}
+
       <h1 className="text-4xl font-bold pb-10 text-center">All Products</h1>
       <div className="mr-2 lg:mr-5 overflow-x-auto">
         <Table className="border-2 mb-5 lg:mb-10">

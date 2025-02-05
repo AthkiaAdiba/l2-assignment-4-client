@@ -9,8 +9,10 @@ import { Link } from "react-router-dom";
 import { IoMdMenu } from "react-icons/io";
 import { verifyToken } from "@/utils/verifyToken";
 import { RiShoppingBasketLine } from "react-icons/ri";
-import { FaHome } from "react-icons/fa";
+import { FaHome, FaUsers } from "react-icons/fa";
 import { useGetSingleUserQuery } from "@/redux/features/admin/user.api";
+import { AiOutlineProduct } from "react-icons/ai";
+import { GoListOrdered } from "react-icons/go";
 
 // type TRoute = {
 //   path: string;
@@ -59,25 +61,25 @@ const Sidebar = () => {
       path: `/${user?.role}/allOrders`,
       name: "All Orders",
       id: 2,
-      icon: <RiShoppingBasketLine />,
+      icon: <GoListOrdered />,
     },
     {
       path: `/${user?.role}/allUsers`,
       name: "All Users",
       id: 3,
-      icon: <RiShoppingBasketLine />,
+      icon: <FaUsers />,
     },
     {
       path: `/${user?.role}/addProduct`,
       name: "Add Product",
       id: 4,
-      icon: <RiShoppingBasketLine />,
+      icon: <AiOutlineProduct />,
     },
     {
       path: `/${user?.role}/allProducts`,
       name: "All Products",
       id: 5,
-      icon: <RiShoppingBasketLine />,
+      icon: <AiOutlineProduct />,
     },
     {
       path: `/`,

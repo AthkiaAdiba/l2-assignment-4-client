@@ -13,6 +13,7 @@ import { GoPerson } from "react-icons/go";
 const Navbar = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const user = useAppSelector(selectCurrentUser);
+  const cartData = useAppSelector((state) => state.cart);
   // console.log(user);
 
   type TRoute = {
@@ -60,14 +61,14 @@ const Navbar = () => {
             )}
             {user && <PopOver />}
 
-            <div className="relative">
+            <Link to="/cart" className="relative">
               <button className="flex items-center gap-2 text-xl font-medium">
                 <SlHandbag /> CART
               </button>
               <p className="relative -mt-10 ml-3 text-2xl font-bold text-red-600">
-                1
+                {cartData?.items?.length}
               </p>
-            </div>
+            </Link>
           </div>
         </div>
 
@@ -114,14 +115,14 @@ const Navbar = () => {
                   </NavLink>
                 </li>
               ))}
-              <div className="relative">
+              <Link to="/cart" className="relative">
                 <button className="flex items-center gap-2 text-lg font-medium">
                   <SlHandbag /> CART
                 </button>
                 <p className="relative -mt-10 ml-3 text-2xl font-bold text-red-600">
-                  1
+                  {cartData?.items?.length}
                 </p>
-              </div>
+              </Link>
             </ul>
           </div>
         )}

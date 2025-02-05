@@ -3,14 +3,31 @@ import wallpaper from "../../assets/profilebg.jpg";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { useGetSingleUserQuery } from "@/redux/features/admin/user.api";
 import ProfileUpdateModal from "@/components/layout/ProfileUpdateModal";
+import { TailSpin } from "react-loader-spinner";
 
 const MyProfile = () => {
   const user = useAppSelector(selectCurrentUser);
-  const { data: singleUser } = useGetSingleUserQuery(user?.userId);
+  const { data: singleUser, isLoading } = useGetSingleUserQuery(user?.userId);
   //   console.log(singleUser);
 
   return (
     <div className="mt-0 lg:mt-10 flex justify-center items-center">
+      {/* Display the loader when loading */}
+      {isLoading && (
+        <div className="flex justify-center items-center py-5">
+          <TailSpin
+            visible={true}
+            height="80"
+            width="80"
+            color="#111827"
+            ariaLabel="tail-spin-loading"
+            radius="1"
+            wrapperStyle={{}}
+            wrapperClass=""
+          />
+        </div>
+      )}
+
       <div className="bg-white shadow-lg rounded-2xl w-full md:w-3/4 lg:w-4/5 xl:w-2/4">
         <img
           alt="profile"

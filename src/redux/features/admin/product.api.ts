@@ -46,7 +46,7 @@ const productManagementApi = baseApi.injectEndpoints({
     }),
     updateProduct: builder.mutation({
       query: (args) => ({
-        url: `/products/${args.id}`,
+        url: `/products/${args.productId}`,
         method: "PUT",
         body: args.data,
       }),
@@ -59,50 +59,6 @@ const productManagementApi = baseApi.injectEndpoints({
       }),
       providesTags: ["products"],
     }),
-    // getAllAcademicFaculty: builder.query({
-    //   query: () => {
-    //     return {
-    //       url: "/academic-faculties",
-    //       method: "GET",
-    //     };
-    //   },
-    //   transformResponse: (response: TResponseRedux<TAcademicFaculty[]>) => {
-    //     // console.log("Inside redux", response);
-    //     return {
-    //       data: response.data,
-    //       meta: response.meta,
-    //     };
-    //   },
-    // }),
-    // addAcademicFaculty: builder.mutation({
-    //   query: (data) => ({
-    //     url: "/academic-faculties/create-academic-faculty",
-    //     method: "POST",
-    //     body: data,
-    //   }),
-    // }),
-    // getAllAcademicDepartment: builder.query({
-    //   query: () => {
-    //     return {
-    //       url: "/academic-departments",
-    //       method: "GET",
-    //     };
-    //   },
-    //   transformResponse: (response: TResponseRedux<TAcademicDepartment[]>) => {
-    //     // console.log("Inside redux", response);
-    //     return {
-    //       data: response.data,
-    //       meta: response.meta,
-    //     };
-    //   },
-    // }),
-    // addAcademicDepartment: builder.mutation({
-    //   query: (data) => ({
-    //     url: "/academic-departments/create-academic-department",
-    //     method: "POST",
-    //     body: data,
-    //   }),
-    // }),
   }),
 });
 

@@ -1,15 +1,33 @@
-import UpdateProductModal from "@/components/layout/UpdateProductModal";
 import { useGetSingleProductQuery } from "@/redux/features/admin/product.api";
 import { TailSpin } from "react-loader-spinner";
 import { useParams } from "react-router-dom";
+import { Button } from "../ui/button";
+import { useAppDispatch } from "@/redux/hooks";
+import { addToCart } from "@/redux/features/cart/cartSlice";
 
-const UpdateProduct = () => {
-  const { productId } = useParams();
-  const { data: gotProduct, isLoading } = useGetSingleProductQuery(productId);
-  const product = gotProduct?.data;
+const ProductDetails = () => {
+  const { id } = useParams();
+  const { data: productData, isLoading } = useGetSingleProductQuery(id);
+  const dispatch = useAppDispatch();
+  const product = productData?.data;
+
+  const handleAddToCart = () => {
+    dispatch(
+      addToCart({
+        product: product._id,
+        name: product.name,
+        price: product.price,
+        productsTotalPrice: product.price,
+        category: product.category,
+        quantity: 1,
+        stock: product.quantity,
+        image: product.image as string,
+      })
+    );
+  };
 
   return (
-    <div className="px-0 lg:px-[10%] xl:px-[25%] pt-4 lg:pt-5 pb-6">
+    <div>
       {/* Display the loader when loading */}
       {isLoading && (
         <div className="flex justify-center items-center py-5">
@@ -26,10 +44,10 @@ const UpdateProduct = () => {
         </div>
       )}
 
-      <div className="card bg-base-100 p-2 md:p-4 shadow-xl">
+      <div className="md:w-3/5 lg:w-3/5 xl:w-2/5 mx-auto card bg-base-100 p-2 md:p-4 shadow-xl">
         <figure>
           <img
-            className="w-full h-[250px] lg:h-[400px]"
+            className="mx-auto bg-[#f2eadd]"
             src={product?.image}
             alt="Shoes"
           />
@@ -58,7 +76,7 @@ const UpdateProduct = () => {
             <span className="font-semibold">Brand:</span> {product?.brand}
           </p>
           <div className="flex justify-end">
-            <UpdateProductModal productId={productId} />
+            <Button onClick={handleAddToCart}>Add to cart</Button>
           </div>
         </div>
       </div>
@@ -66,4 +84,4 @@ const UpdateProduct = () => {
   );
 };
 
-export default UpdateProduct;
+export default ProductDetails;
