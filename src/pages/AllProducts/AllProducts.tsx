@@ -101,13 +101,13 @@ const AllProducts = () => {
         {/* card div */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {products?.map((product: TProduct) => (
-            <div key={product._id} className="pb-10">
+            <div key={product._id} className="pb-10 flex flex-col">
               <img
                 src={product?.image}
                 alt=""
                 className="bg-[#f5eede] sm:w-full h-[300px]"
               />
-              <div className="space-y-2 lg:px-2 mt-2">
+              <div className="flex-grow space-y-2 lg:px-2 mt-2">
                 <div className="flex items-center justify-between">
                   <h1 className="text-2xl font-medium">{product?.name}</h1>
                   <h1 className="text-2xl">

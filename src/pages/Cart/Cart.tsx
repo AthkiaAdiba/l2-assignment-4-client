@@ -1,21 +1,36 @@
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import {
   removeFromCart,
   updateQuantity,
 } from "@/redux/features/cart/cartSlice";
 import { useCreateOrdersMutation } from "@/redux/features/order/order.api";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 const Cart = () => {
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
   const dispatch = useAppDispatch();
   const cartData = useAppSelector((state) => state.cart);
+  const user = useAppSelector(selectCurrentUser);
   const [createOrder, { isLoading, isSuccess, data, isError, error }] =
     useCreateOrdersMutation();
 
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    // console.log(data);
+    setAddress(data.address);
+    setPhone(data.phone);
+  };
+
   const handlePlaceOrder = async () => {
-    await createOrder({ products: cartData.items });
+    await createOrder({ products: cartData.items, address, phone });
   };
 
   const toastId = "cart";
@@ -113,6 +128,36 @@ const Cart = () => {
       </div>
       {/* summery cart */}
       <div>
+        {/* form div */}
+        <div className="bg-[#f4eee0] p-5 mb-10">
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Label htmlFor="address" className="text-xl font-semibold">
+              Shipping Address:
+            </Label>
+            <Input
+              className="bg-white rounded-none shadow-md mt-2"
+              type="text"
+              id="address"
+              defaultValue={user?.address}
+              {...register("address")}
+            />
+            <Label htmlFor="phone" className="text-xl font-semibold">
+              Phone:
+            </Label>
+            <Input
+              className="bg-white rounded-none shadow-md mt-2"
+              type="number"
+              id="phone"
+              defaultValue={user?.phone}
+              {...register("phone")}
+            />
+            <Button type="submit" className="mt-5 w-full rounded-none">
+              Update Address
+            </Button>
+          </form>
+        </div>
+
+        {/* order summery */}
         <div className="bg-[#fffefa] p-5 md:w-[260px] lg:w-[350px] space-y-4">
           <h1 className="text-2xl font-semibold">Order Summery</h1>
           <p className="text-lg">{cartData?.totalQuantity} items</p>
