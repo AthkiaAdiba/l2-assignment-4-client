@@ -32,7 +32,7 @@ const PopOver = () => {
       </PopoverTrigger>
       <PopoverContent className="bg-[#f6dfd1] w-40 text-base font-normal">
         <Link
-          to={`/${user?.role}/dashboard`}
+          to={`/${user?.role}/myProfile`}
           className="flex items-center gap-2"
         >
           <RxDashboard /> Dashboard
