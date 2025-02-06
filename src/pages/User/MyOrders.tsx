@@ -101,6 +101,29 @@ const MyOrders = () => {
               </div>
               {/* 2nd column */}
               <div>
+                {/*  */}
+                <div>
+                  <h1 className="text-2xl font-semibold mb-3 mt-3">
+                    Shipping Information
+                  </h1>
+                  <div className="space-y-1">
+                    <p>
+                      <span className="text-base font-semibold mr-1">
+                        Address:
+                      </span>
+                      {item?.shippingAddress}
+                    </p>
+                    <p>
+                      <span className="text-base font-semibold mr-1">
+                        Phone:
+                      </span>
+                      {item?.shippingPhone}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              {/* 3nd column */}
+              <div>
                 <div>
                   <h1 className="text-2xl font-semibold mb-3">Order Summery</h1>
                   <div className="space-y-1">

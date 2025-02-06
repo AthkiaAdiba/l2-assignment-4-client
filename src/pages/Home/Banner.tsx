@@ -3,7 +3,7 @@ import banner from "../../assets/banner.avif";
 
 const Banner = () => {
   return (
-    <div className="bg-[#f4eee0] px-2 md:px-6 xl:pl-52 flex items-center gap-52">
+    <div className="bg-[#f4eee0] px-2 md:px-6 xl:pl-52 flex flex-col md:flex-row lg:flex-row items-center gap-5 lg:gap-52">
       <div className="text-center space-y-6">
         <h4 className="text-lg font-medium">Notebook</h4>
         <h1 className="text-4xl font-semibold">
@@ -16,7 +16,7 @@ const Banner = () => {
         <Button>Shop Notebook</Button>
       </div>
       <div className="">
-        <img src={banner} alt="" className="h-[500px]" />
+        <img src={banner} alt="" className="h-[400px] lg:h-[500px]" />
       </div>
     </div>
   );

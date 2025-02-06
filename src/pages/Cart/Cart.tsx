@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { useGetSingleUserQuery } from "@/redux/features/admin/user.api";
 import {
   removeFromCart,
   updateQuantity,
@@ -17,10 +17,14 @@ const Cart = () => {
   const [phone, setPhone] = useState("");
   const dispatch = useAppDispatch();
   const cartData = useAppSelector((state) => state.cart);
-  const user = useAppSelector(selectCurrentUser);
+  // const user = useAppSelector(selectCurrentUser);
   const [createOrder, { isLoading, isSuccess, data, isError, error }] =
     useCreateOrdersMutation();
+  const { data: userData } = useGetSingleUserQuery(undefined);
+  const user = userData?.data;
 
+  console.log(address);
+  console.log(phone);
   const { register, handleSubmit } = useForm();
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
@@ -30,7 +34,13 @@ const Cart = () => {
   };
 
   const handlePlaceOrder = async () => {
-    await createOrder({ products: cartData.items, address, phone });
+    await createOrder({
+      products: cartData.items,
+      address,
+      phone,
+      name: user?.name,
+      email: user?.email,
+    });
   };
 
   const toastId = "cart";
@@ -129,8 +139,28 @@ const Cart = () => {
       {/* summery cart */}
       <div>
         {/* form div */}
-        <div className="bg-[#f4eee0] p-5 mb-10">
+        <div className="bg-[#f4eee0] p-5 mb-10 space-y-2">
           <form onSubmit={handleSubmit(onSubmit)}>
+            <Label htmlFor="name" className="text-xl font-semibold">
+              Name:
+            </Label>
+            <Input
+              className="bg-white rounded-none shadow-md mt-2"
+              type="text"
+              id="name"
+              defaultValue={user?.name}
+              disabled={true}
+            />
+            <Label htmlFor="email" className="text-xl font-semibold">
+              Email:
+            </Label>
+            <Input
+              className="bg-white rounded-none shadow-md mt-2"
+              type="email"
+              id="email"
+              defaultValue={user?.email}
+              disabled={true}
+            />
             <Label htmlFor="address" className="text-xl font-semibold">
               Shipping Address:
             </Label>
@@ -152,7 +182,7 @@ const Cart = () => {
               {...register("phone")}
             />
             <Button type="submit" className="mt-5 w-full rounded-none">
-              Update Address
+              Update Information
             </Button>
           </form>
         </div>
