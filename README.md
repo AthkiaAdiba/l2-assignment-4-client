@@ -1,50 +1,112 @@
-# React + TypeScript + Vite
+# Stationery Shop
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Stationery Shop is a robust fronted application designed to power the operations of an e-commerce platform specializing in stationery products. Built with modern web technologies, it provides a secure, scalable, and efficient fronted solution to manage data and handle client requests. It is a responsive application for all devices. There are admin and user role.
 
-Currently, two official plugins are available:
+## 🚀 Fronted Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+https://l2-assignment-4-coral.vercel.app
 
-## Expanding the ESLint configuration
+## 🚀 Backend Live Demo
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+https://stationery-shop-b4-a2-v5.vercel.app
 
-- Configure the top-level `parserOptions` property like this:
+## ✨ Features
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- 🛠️ **CRUD Operations:** Full support for creating, reading, updating, and deleting products.
+
+- 🔑 **Token:** Refresh and access token are provided in login time.
+
+- 📦 **Error Handling:** If any error happens, error messages is provided.
+
+- 🗂️ **Categorization:** Filter, searching products by categories, brands, name, and price range.
+
+- ⚙️ **Scalable Design:** Built to handle growing demands and datasets. It is also a responsive application.
+- 💳 **Secure Payment Integration:** Secure payment integration has been implemented with **Shurjopay**. Users can order their chose products.
+
+- 🔒 **Bcrypt Password Hashing:** Bcrypt password hashing has been implemented To secure users password.
+- 👥 **Admin Role:** Admin role has been implemented. Only admin can add, update, and delete the product. Also admin manages orders and users.
+
+## 🛠️ Technologies Used
+
+### Backend Framework
+
+- **Node.js:** High-performance runtime for building scalable applications.
+- **Express.js:** Framework for creating RESTful APIs efficiently.
+
+### Database
+
+- **MongoDB:** NoSQL database for secure and flexible data storage.
+- **Mongoose:** Elegant ODM for MongoDB, enabling schema validation and easy database interactions.
+
+### Development Tools
+
+- **TypeScript:** Ensures type safety, enhancing code maintainability.
+
+### State Management
+
+- **@reduxjs/toolkit:** Simplifies state management with Redux.
+- **React Redux:** Official React bindings for Redux, enabling global state management.
+- **Redux Persist:** Persists and rehydrates the Redux store for better user experience.
+
+## ⚙️ Installation and Setup
+
+Follow these steps to set up and run the backend server locally:
+
+### Prerequisites
+
+- **Node.js** (v14 or higher)
+- **npm** (v6 or higher)
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/AthkiaAdiba/l2-assignment-4-client.git
+cd l2-assignment-4
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Install Dependencies
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+npm install
 ```
+
+### Run the Fronted
+
+#### Development Mode
+
+```bash
+npm run dev
+```
+
+#### Production Mode
+
+```bash
+npm run build
+```
+
+## 🔗 Scripts
+
+- `npm run dev`: Starts the development fronted with hot reloading.
+
+- `npm run build`: Compiles TypeScript into JavaScript.
+
+- `npm run lint`: Checks code for linting issues.
+
+## 🤝 Contributing
+
+Contributions are welcome! To contribute:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Make your changes and commit (`git commit -m "Add feature"`)
+4. Push your changes (`git push origin feature-branch`).
+5. Open a Pull Request.
+
+## 📜 License
+
+This project is licensed under the **ISC License**.
+
+## 📞 Contact
+
+For any queries or feedback, feel free to reach out:
+Email: athkiaadiba@gmail.com
