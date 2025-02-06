@@ -16,11 +16,13 @@ import { toast } from "sonner";
 import { useAppSelector } from "@/redux/hooks";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { useUpdateSingleUserMutation } from "@/redux/features/admin/user.api";
+import { useState } from "react";
 
 const ProfileUpdateModal = () => {
   const user = useAppSelector(selectCurrentUser);
   //   const { data: singleUser } = useGetSingleUserQuery(user?.userId);
   const [updateProfile] = useUpdateSingleUserMutation();
+  const [open, setOpen] = useState(false);
   //   console.log(singleUser);
 
   const { register, handleSubmit, reset } = useForm();
@@ -97,16 +99,18 @@ const ProfileUpdateModal = () => {
         toast.error(errorMessage, { id: toastId });
       } else {
         toast.success(res?.data?.message, { id: toastId });
+        setOpen(false);
         reset();
       }
     } catch (error: any) {
       toast.error(error.data.message, { id: toastId });
+      setOpen(false);
       reset();
     }
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button className="bg-gray-900 text-white">Edit Profile</Button>
       </DialogTrigger>
